@@ -23,7 +23,8 @@ Options:
   --help     display this help message and exit.
   --version  display version information and exit.";
 
-const VERSION_MESSAGE: &str = "no (Rust) 1.0.0
+const VERSION_MESSAGE: &str =
+"no (Rust) 1.0.0
 Copyright (C) 2024 Petr Alexandrovich Sabanov
 License GPLv3.0: GNU General Public License v3.0 <https://www.gnu.org/licenses/gpl-3.0.html>";
 
