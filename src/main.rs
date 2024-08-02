@@ -21,7 +21,7 @@ Repeatedly output a line with all specified STRING(s), or 'n'.
 
 Options:
   --help     display this help message and exit.
-  --version  display version information and exit.";
+  --version  output version information and exit.";
 
 const VERSION_MESSAGE: &str =
 "no (Rust) 1.0.0
