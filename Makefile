@@ -52,9 +52,9 @@ relwithdebinfo: run-relwithdebinfo
 minsize: run-minsize
 
 clean: clean-dev clean-debug clean-release clean-relwithdebinfo clean-minsize
+	rm -rf "./target/"
 
 clean-dev: clean-debug
-	rm -rf "./target/"
 clean-debug:
 	rm -rf "./target/debug/"
 clean-release:
