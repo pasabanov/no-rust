@@ -44,14 +44,12 @@ fn main() {
 	let mut parse_args = true;
 
 	for arg in &args[1..] {
-		if arg == "--" {
-			parse_args = false;
-			continue;
-		}
-
 		if parse_args && arg.starts_with("-") {
 			if arg.starts_with("--") {
-				if arg == "--help" {
+				if arg == "--" {
+					parse_args = false;
+					continue;
+				} else if arg == "--help" {
 					println!("{}", HELP_MESSAGE);
 				} else if arg == "--version" {
 					println!("{}", VERSION_MESSAGE);
