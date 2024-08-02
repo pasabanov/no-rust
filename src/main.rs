@@ -39,7 +39,7 @@ fn main() {
 
 	let args: Vec<String> = args().collect();
 
-	let mut message = String::new();
+	let mut args_to_print = Vec::with_capacity(args.len() - 1);
 
 	let mut parse_args = true;
 
@@ -61,26 +61,15 @@ fn main() {
 			}
 			return;
 		}
-
-		if !message.is_empty() {
-			message.push(' ');
-		}
-		message.push_str(arg);
+		args_to_print.push(&arg[..]);
 	}
 
-	if message.is_empty() {
-		message = "n\n".to_string();
+	let message = if args_to_print.is_empty() {
+		"n\n".to_string()
 	} else {
-		message.push('\n');
-	}
+		args_to_print.join(" ") + "\n"
+	};
 
 	let mut out = io::stdout();
-	loop {
-		if let Err(_) = out.write_all(message.as_bytes()) {
-			break;
-		}
-		if let Err(_) = out.flush() {
-			break;
-		}
-	}
+	while out.write_all(message.as_bytes()).is_ok() && out.flush().is_ok() {}
 }
