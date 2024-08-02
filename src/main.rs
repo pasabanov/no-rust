@@ -38,13 +38,13 @@ Try 'no --help' for more information.";
 
 fn main() {
 
-	let args: Vec<String> = args().collect();
+	let mut args = args().skip(1);
 
-	let mut args_to_print = Vec::with_capacity(args.len() - 1);
+	let mut args_to_print = Vec::with_capacity(args.len());
 
 	let mut parse_args = true;
 
-	for arg in &args[1..] {
+	while let Some(arg) = args.next() {
 		if parse_args && arg.starts_with("-") {
 			if arg.starts_with("--") {
 				if arg == "--" {
@@ -55,14 +55,14 @@ fn main() {
 				} else if arg == "--version" {
 					println!("{}", VERSION_MESSAGE);
 				} else {
-					eprintln!("{}", UNRECOGNIZED_OPTION_MESSAGE.replace("{}", arg));
+					eprintln!("{}", UNRECOGNIZED_OPTION_MESSAGE.replace("{}", &arg));
 				}
 			} else {
-				eprintln!("{}", INVALID_OPTION_MESSAGE.replace("{}", arg));
+				eprintln!("{}", INVALID_OPTION_MESSAGE.replace("{}", &arg));
 			}
 			return;
 		}
-		args_to_print.push(&arg[..]);
+		args_to_print.push(arg);
 	}
 
 	let message = if args_to_print.is_empty() {
